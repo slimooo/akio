@@ -1,0 +1,35 @@
+{{ define "main" }}
+
+<div class="container">
+  <div class="page-section-head">
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ if .Description }}
+    <p class="page-description">{{ .Description }}</p>
+    {{ end }}
+  </div>
+</div>
+
+<div class="work-page container animate">
+  <div class="row">
+    {{ range (where .Site.RegularPages "Section" "works" ) }}
+    <article class="work col col-4 col-d-6 col-t-12">
+      <div class="work__content">
+        <a href="{{ .RelPermalink }}" class="work__image">
+          <img class="lazy" data-src="{{ .Params.Image | absURL }}" alt="{{ .Params.Title }}">
+        </a>
+        <div class="work__info">
+          {{ if .Params.category }}
+          <div class="work__category">{{ .Params.category }}</div>
+          {{ end }}
+          <h3 class="work__title"><a href="{{ .RelPermalink }}">{{ .Params.title }}</a></h3>
+          {{ if .Params.description }}
+          <p class="work__description">{{ .Params.description }}</p>
+          {{ end }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>
+
+{{ end }}

@@ -1,0 +1,64 @@
+{{ define "main" }}
+
+{{ if (eq .Section "tags") }}
+
+<!-- begin tags -->
+<div class="tags">
+
+  <div class="tags__inner">
+    <div class="container">
+      <div class="tag__info">
+        <h1 class="tag__name">{{ humanize .Title }} <span class="tag__counter">{{ len .Pages }}</span></h1>
+        <div class="tag__link">Check out the <a href="/posts">latest posts</a></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col col-12">
+          <div class="section-small">
+            <div class="section__inner grid">
+            {{ range .Data.Pages }}
+              {{ partial "article.html" . }}
+            {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- end tags -->
+
+{{ else }}
+
+<div class="container">
+  <div class="page-section-head">
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ if .Description }}
+    <p class="page-description">{{ .Description }}</p>
+    {{ end }}
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col col-12">
+      <div class="section-small">
+        <div class="section__inner grid">
+          {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts" ) }}
+          {{ range $paginator.Pages }}
+            {{ partial "article" . }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ partial "pagination.html" . }}
+
+{{ end }}
+
+{{ end }}

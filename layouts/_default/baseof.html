@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+{{ partial "head.html" . }}
+
+  <body>
+
+    {{ template "_internal/google_analytics.html" . }}
+
+    {{ partial "header.html" . }}
+
+    <!-- begin content -->
+    <main class="content" aria-label="Content">
+      {{ block "main" . }}{{ end }}
+    </main>
+    <!-- end content -->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    {{ partial "footer.html" . }}
+
+    {{ partial "javascripts.html" . }}
+
+  </body>
+
+</html>

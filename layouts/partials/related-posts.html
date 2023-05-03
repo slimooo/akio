@@ -1,0 +1,21 @@
+{{ if or (in ( where .Site.Pages ".Params.tags" "intersect" .Params.tags ) "Pages(0)" ) (in ( where .Site.Pages ".Params.tags" "intersect" .Params.tags ) "Pages(1)" ) }}
+{{ else }}
+<!-- begin related posts -->
+<div class="container animate">
+  <div class="row">
+    <div class="col col-12">
+      <div class="section-small related-posts">
+        <div class="section__info">
+          <h2 class="section__title">Related Posts</h2>
+        </div>
+        <div class="section__inner">
+        {{ range first 3 ( where ( where .Site.Pages.ByDate.Reverse ".Params.tags" "intersect" .Params.tags ) "Permalink" "!=" .Permalink ) }}
+          {{ partial "article.html" . }}
+        {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end related posts -->
+{{ end }}

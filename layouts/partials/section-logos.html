@@ -1,0 +1,29 @@
+{{ if .Site.Params.logos.enable }}
+<!-- begin logos -->
+<section class="section logos animate">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <div class="section__info">
+          <h2 class="section__small__title">{{ .Site.Params.logos.logos__title | safeHTML }}</h2>
+        </div>
+
+        <ul class="logos__list list-reset">
+          {{ with .Site.Params.logo_item }}
+          {{ range . }}
+          <li class="logos__item">
+            <a href="{{ .link }}" class="logos__link" rel="noopener">
+              <img src="{{ .image }}" alt="{{ .name }}" class="logos__image">
+            </a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end logos -->
+{{ end }}

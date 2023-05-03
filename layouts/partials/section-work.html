@@ -1,0 +1,44 @@
+{{ if .Site.Params.work.enable }}
+<!-- begin works -->
+<div class="container">
+  <section class="section works animate">
+    <div class="row">
+
+      <div class="col col-4 col-d-12">
+        <div class="section__info">
+          <h2 class="section__title">{{ .Site.Params.work.work__title | safeHTML }}</h2>
+          {{ if .Site.Params.work.work__description }}
+            <p class="section__description">{{ .Site.Params.work.work__description }}</p>
+          {{ end }}
+          <a href="/works" class="section__link">Show all works <i class="ion ion-md-arrow-forward"></i></a>
+        </div>
+      </div>
+
+      <div class="col col-8 col-d-12">
+        <div class="row">
+          {{ range (where .Site.RegularPages "Section" "works" | first 4 ) }}
+          <article class="work col col-6 col-d-12">
+            <div class="work__content">
+              <a href="{{ .RelPermalink }}" class="work__image">
+                <img class="lazy" data-src="{{ .Params.Image | absURL }}" alt="{{ .Params.Title }}">
+              </a>
+              <div class="work__info">
+                {{ if .Params.category }}
+                  <div class="work__category">{{ .Params.category }}</div>
+                {{ end }}
+                <h3 class="work__title"><a href="{{ .RelPermalink }}">{{ .Params.title }}</a></h3>
+                {{ if .Params.description }}
+                  <p class="work__description">{{ .Params.description }}</p>
+                {{ end }}
+              </div>
+            </div>
+          </article>
+          {{ end }}
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+<!-- end works -->
+{{ end }}

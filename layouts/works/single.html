@@ -1,0 +1,109 @@
+{{ define "main" }}
+
+<div class="work-head">
+  <div class="container">
+
+    <div class="row">
+      {{ if .Params.image }}
+      <div class="col col-5 col-d-12">
+        <div class="work-head__left">
+          <div class="work-head__image">
+            <img class="lazy" data-src="{{ .Params.Image | absURL }}" alt="{{ .Title }}">
+          </div>
+          {{ if .Params.image_caption }}
+          <div class="page-image-caption">{{ .Params.image_caption | markdownify }}</div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+
+      <div class="col col-7 col-d-12">
+        <div class="work-head__right">
+          {{ if .Params.category }}
+          <div class="work-category">{{ .Params.category }}</div>
+          {{ end }}
+          <h1 class="page-title">{{ .Title }}</h1>
+          {{ if .Params.description }}
+          <p class="page-description">{{ .Params.description }}</p>
+          {{ end }}
+          <ul class="work-meta list-reset">
+            {{ if .Params.description }}
+            <li class="work-meta__item"><strong>Date:</strong> <span>{{ .Date.Format "2 Jan, 2006" }}</span></li>
+            {{ end }}
+            {{ if .Params.client }}
+            <li class="work-meta__item"><strong>Client:</strong> <span>{{ .Params.client }}</span></li>
+            {{ end }}
+            {{ if .Params.role }}
+            <li class="work-meta__item"><strong>Role:</strong> <span>{{ .Params.role }}</span></li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container animate">
+
+  <div class="page">
+    {{ .Content }}
+  </div>
+
+  <section class="section work-navigation">
+    <div class="row">
+      <div class="col col-12">
+        <div class="section__info">
+          <div class="section__head">
+            <h2 class="section__title">Next</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{ if or .NextInSection .PrevInSection }}
+    <div class="row">
+      {{ if .PrevInSection }}
+      <article class="work col col-6 col-d-12">
+        <div class="work__content">
+          <a href="{{ .PrevInSection.Permalink }}" class="work__image">
+            <img class="lazy" data-src="{{ .PrevInSection.Params.Image }}" alt="{{ .PrevInSection.Title }}">
+          </a>
+          <div class="work__info">
+            {{ if .PrevInSection.Params.Category }}
+            <div class="work__category">{{ .PrevInSection.Params.Category }}</div>
+            {{ end }}
+            <h3 class="work__title"><a href="{{ .PrevInSection.Permalink }}">{{ .PrevInSection.Title }}</a></h3>
+            {{ if .PrevInSection.Description }}
+            <p class="work__description">{{ .PrevInSection.Description }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+
+      {{ if .NextInSection }}
+      <article class="work col col-6 col-d-12">
+        <div class="work__content">
+          <a href="{{ .NextInSection.Permalink }}" class="work__image">
+            <img class="lazy" data-src="{{ .NextInSection.Params.Image }}" alt="{{ .NextInSection.Title }}">
+          </a>
+          <div class="work__info">
+            {{ if .NextInSection.Params.Category }}
+            <div class="work__category">{{ .NextInSection.Params.Category }}</div>
+            {{ end }}
+            <h3 class="work__title"><a href="{{ .NextInSection.Permalink }}">{{ .NextInSection.Title }}</a></h3>
+            {{ if .NextInSection.Description }}
+            <p class="work__description">{{ .NextInSection.Description }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ end }}
+  </section>
+
+</div>
+
+{{ end }}

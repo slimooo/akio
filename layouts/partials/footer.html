@@ -1,0 +1,29 @@
+<!-- begin footer -->
+<footer class="footer">
+
+  <div class="footer__inner">
+    <div class="container">
+      <div class="footer__author">
+        <div class="footer__author-info">
+          <h3 class="footer__author-name">{{.Site.Params.author.author__name}}</h3>
+          {{ partial "social-links.html" . }}
+          <p class="footer__author-bio">{{.Site.Params.author.author__bio}}</p>
+        </div>
+      </div>
+    </div>
+
+    {{ if .Site.Params.footer.footer__background__image }}
+    <div class="footer__bg lazy" data-bg="{{.Site.Params.footer.footer__background__image}}"></div>
+    {{ end }}
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <div class="copyright">{{ dateFormat "2006" now }} &copy; <a href="/">{{ .Site.Title }}</a>. All Right Reserved. Published with <a href="https://gohugo.io/">Hugo</a> and <a href="https://anvodstudio.com/" target="_blank" rel="noopener noreferrer">Akio</a>.</div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+<!-- end footer -->
